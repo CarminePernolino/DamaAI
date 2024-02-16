@@ -24,12 +24,11 @@ public class Board extends JPanel {
     private Point Start;
     private Point End;
 
-    public Board(JLabel statusBar){
+    public Board(){
         super(true);
         setBackground(l_brown);
         setDoubleBuffered(true);
 
-        //this.statusBar = statusBar;
 
         //Inizializzo la lista delle coordinate per le correlazioni
         for (int row = 0; row < 8; row++)

@@ -4,8 +4,7 @@ import javax.swing.*;
 
 public class Form extends JFrame {
     private int SQ_DIM = 80;
-    public JLabel statusBar = new JLabel();
-    private Board b = new Board(statusBar);
+    private Board b = new Board();
 
     public Form(String txt) {
         super(txt);
