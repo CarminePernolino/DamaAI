@@ -13,12 +13,12 @@ public class Move {
     }
 
     private static void CheckForNewDame(int[][] matrix) {
-        for(int j = 0; j < 8; j++) {
-            if (matrix[0][j] == Dama.WHITE) // check dame bianche
-                matrix[0][j] = Dama.D_WHITE;
+        for(int col = 0; col < 8; col++) {
+            if (matrix[0][col] == Dama.WHITE) // check dame bianche
+                matrix[0][col] = Dama.D_WHITE;
 
-            if (matrix[7][j] == Dama.BLACK)
-                matrix[7][j] = Dama.D_BLACK;
+            if (matrix[7][col] == Dama.BLACK) // check dame nere
+                matrix[7][col] = Dama.D_BLACK;
         }
     }
 }

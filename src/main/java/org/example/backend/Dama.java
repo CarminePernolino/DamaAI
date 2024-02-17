@@ -7,32 +7,34 @@ import java.util.Vector;
 public class Dama {
     //Definizione Pedine e Dame
     public final static int BLANK = 0;
-    public final static int BLACK = 1;
-    public final static int WHITE = 2;
+    public final static int BLACK = 1; // Pedina Nera
+    public final static int WHITE = 2; // Pedina Bianca
 
-    public final static int D_BLACK = 3;
-    public final static int D_WHITE = 4;
+    public final static int D_BLACK = 3; // Dama Nera
+    public final static int D_WHITE = 4; // Dama Bianca
 
     public static int MAX_DEPTH = 6;
 
     private int matrix[][];
 
     public Dama() {
-        /*
-        Inizializzo la matrix con l'opportuna disposizione delle pedine
+        /**
+         * Inizializza la matrice con tutte le pedine
+         * -> if ((riga % 2) == (col % 2)): controlla se la somma degli indici di riga e colonna è pari o dispari.
+         *    Se la somma è pari, significa che ci troviamo su una casella nera della scacchiera.
          */
         this.matrix = new int[8][8];
-        for(int i = 0; i<8; i++)
-            for(int j = 0; j<8; j++)
-                if ((i % 2) == (j % 2)) {
-                    if (i<3)
-                        this.matrix[i][j] = BLACK;
-                    else if (i>4)
-                        this.matrix[i][j] = WHITE;
+        for(int riga = 0; riga<8; riga++)
+            for(int col = 0; col<8; col++)
+                if ((riga % 2) == (col % 2)) {
+                    if (riga<3)
+                        this.matrix[riga][col] = BLACK;
+                    else if (riga>4)
+                        this.matrix[riga][col] = WHITE;
                     else
-                        this.matrix[i][j] = BLANK;
+                        this.matrix[riga][col] = BLANK;
                 } else
-                    this.matrix[i][j] = BLANK;
+                    this.matrix[riga][col] = BLANK;
     }
 
     public int[][] GetMatrix(){
@@ -47,6 +49,11 @@ public class Dama {
         return newM;
     }
 
+    /**
+     * Restituisce un vettore (Vector) di oggetti di tipo Move, che rappresentano le mosse valide.
+     * @param color colore per il quale si desiderano calcolare le mosse valide
+     * @return
+     */
     public Vector<Move> RetriveMoves(int color){
         MovesEngine me = new MovesEngine(matrix, color);
         return me.PossibleBestMooves;
