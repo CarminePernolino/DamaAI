@@ -84,9 +84,13 @@ public class Board extends JPanel {
             current_m_coo.add(End);
         }
 
+        /**
+         * Gestisce il movimento delle pedine nel gioco della dama, esegue controlli di validità delle mosse,
+         * aggiorna lo stato del gioco e gestisce eventuali errori durante il processo.
+         */
         if (Dama.CheckMoveAndExecute(LegalMoves,current_m_coo)){
             m = Dama.CopyMatrix();
-            System.gc();
+            System.gc(); // Richiamo al Garbage Collector
             current_m_coo.clear();
             this.repaint();
             try {
@@ -103,6 +107,10 @@ public class Board extends JPanel {
             return;
         }
 
+        /**
+         * Gestisce il movimento delle pedine nel gioco della dama, verifica se una mossa è valida e aggiorna
+         * lo stato del gioco di conseguenza, includendo la possibilità di promozione delle pedine a dame bianche.
+         */
         for(Move mo : LegalMoves)
             if (Check(mo.Sequence, current_m_coo)){
                 if (m[End.x][End.y] == Dama.BLANK)
@@ -122,16 +130,30 @@ public class Board extends JPanel {
                 return;
             }
 
+        /**
+         *  Lo svuotamento del vettore quando contiene solo due coordinate serve a mantenere il vettore pulito
+         *  e pronto per memorizzare le coordinate di nuovi movimenti delle pedine durante il gioco.
+         */
         if (current_m_coo.size() == 2){
             current_m_coo.clear();
         }
 
-        // a questo punto la mossa era illegale
+        /**
+         * A questo punto la mossa era illegale
+         */
         JOptionPane.showMessageDialog(null, "Move not allowed!");
         return;
 
     }
 
+    /**
+     * Confronta due vettori di punti per determinare se contengono gli stessi punti nello stesso ordine.
+     * Se i vettori sono uguali, il metodo restituisce true; altrimenti, restituisce false.
+     * Controlla se le mosse che il giocatore vuole effettuare sono valide o meno.
+     * @param LegalM
+     * @param CurrM
+     * @return
+     */
     private boolean Check (Vector<Point> LegalM, Vector<Point> CurrM){
         for (int i = 0; i < CurrM.size(); i++)
             if (!LegalM.elementAt(i).equals(CurrM.elementAt(i)))
@@ -139,22 +161,32 @@ public class Board extends JPanel {
         return true;
     }
 
-    public void Reset_Game(){
+    /**
+     * Reimposta tutte le variabili e gli oggetti associati al gioco della dama alla loro condizione iniziale,
+     * preparando così il gioco per un nuovo round o una nuova partita.
+     */
+    public void     Reset_Game(){
         this.Dama = new Dama();
         this.m = Dama.CopyMatrix();
         current_m_coo.clear();
         LegalMoves = null;
     }
 
+    /**
+     * controlla il numero di pedine nere e bianche sulla scacchiera e determina se uno dei giocatori ha vinto la
+     * partita in base a ciò.
+     * Se uno dei giocatori ha esaurito tutte le sue pedine, viene visualizzato un messaggio di vittoria
+     * corrispondente e il gioco viene resettato.
+     */
     private void CheckWins() {
         int numBLACK = 0, numWHITE = 0;
-        for (int i = 0; i < 8; i++)
-            for (int j = 0; j < 8; j++)
+        for (int row = 0; row < 8; row++)
+            for (int col = 0; col < 8; col++)
             {
-                if (m[i][j] == Dama.WHITE || m[i][j] == Dama.D_WHITE)
+                if (m[row][col] == Dama.WHITE || m[row][col] == Dama.D_WHITE)
                     numWHITE++;
                 else
-                if (m[i][j] == Dama.BLACK || m[i][j] == Dama.D_BLACK)
+                if (m[row][col] == Dama.BLACK || m[row][col] == Dama.D_BLACK)
                     numBLACK++;
             }
 
@@ -170,20 +202,25 @@ public class Board extends JPanel {
     }
 
     public void paintComponent(Graphics g){
-        int x, y;
+        int x, y; // per memorizzare le coordinate x e y di ogni cella della scacchiera o delle pedine.
         setDoubleBuffered(true);
         Graphics2D g2 = (Graphics2D) g;
         super.paintComponent(g2);
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON);
+        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING,RenderingHints.VALUE_ANTIALIAS_ON); // Imposta l'antialiasing
+        // per migliorare la qualità del rendering, rendendo i bordi delle forme più lisci e meno "scolpiti".
 
         // disegno la scacchiera
         g2.setColor(d_brown);
-        for (int i = 0; i < 8; i++)
-            for (int j = 0; j < 8; j++)
-                if((i % 2) == (j % 2))
-                    g2.fillRect(j * SQ_DIM, i * SQ_DIM, SQ_DIM, SQ_DIM);
+        for (int row = 0; row < 8; row++)
+            for (int col = 0; col < 8; col++)
+                if((row % 2) == (col % 2))
+                    g2.fillRect(col * SQ_DIM, row * SQ_DIM, SQ_DIM, SQ_DIM);
 
         // disegno le pedine
+        // Se il valore è 1, viene disegnata una pedina nera.
+        // Se il valore è 2, viene disegnata una pedina bianca.
+        // Se il valore è 3, viene disegnata una dama nera con una corona rossa.
+        // Se il valore è 4, viene disegnata una dama bianca con una corona grigia.
         for(int i = 0; i < 8; i++)
             for(int j = 0; j < 8; j++)
                 switch (m[i][j]){

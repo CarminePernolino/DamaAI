@@ -12,6 +12,11 @@ public class Move {
         this.FinalMatrix = m;
     }
 
+    /**
+     * Controlla se ci sono pedine bianche o nere nella prima o nell'ultima riga della scacchiera e le promuove a
+     * dame se soddisfano i criteri di promozione.
+     * @param matrix
+     */
     private static void CheckForNewDame(int[][] matrix) {
         for(int col = 0; col < 8; col++) {
             if (matrix[0][col] == Dama.WHITE) // check dame bianche

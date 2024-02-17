@@ -33,13 +33,6 @@ public class DamaTree {
 
         MovesEngine me = new MovesEngine(matrix, color);
 
-        /* caso in cui il nodo sia una foglia */
-        /*if (me.PossibleBestMooves.size() == 0) {
-            score = Dama.Valute(matrix);
-            return;
-        }
-    */
-
         /* creazione albero di ricerca */
         for(Move m : me.PossibleBestMooves){
             sons.add(new DamaTree(m.FinalMatrix, depth-1, turn));
@@ -77,16 +70,5 @@ public class DamaTree {
                 return matrix;
             }
         return matrix;
-    }
-
-    public static void PrintMoves(Vector<Move> m){
-        System.out.println("Serie di mosse: "+ m.size());
-        for(Move serie : m){
-            for(Point c : serie.Sequence){
-                System.out.print(c.toString());
-            }
-            System.out.print("\n");
-        }
-
     }
 }
