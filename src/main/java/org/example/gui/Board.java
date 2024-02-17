@@ -11,8 +11,8 @@ import java.util.ArrayList;
 import java.util.Vector;
 
 public class Board extends JPanel {
-    private static int SQ_DIM = 80;
-    private static int IN_R = 20;
+    private static int SQ_DIM = 80; // Dimensione cella scacchiera
+    private static int IN_R = 20; // Dimensione della pedina di gioco
     private Dama Dama;
     private int[][] m = new int[8][8];
     private Vector<Move> LegalMoves = null;
@@ -65,6 +65,11 @@ public class Board extends JPanel {
         if (Start.equals(End))
             return;
 
+        /**
+         * Controlla se ci sono mosse legali disponibili per le pedine nere nel gioco della dama.
+         * Se non ce ne sono, il giocatore Nero vince.
+         * Altrimenti, le coordinate del movimento delle pedine vengono memorizzate nel vettore current_m_coo.
+         */
         if (current_m_coo.isEmpty()){
             LegalMoves = Dama.RetriveMoves(0);
             if (LegalMoves.size() == 0){
@@ -182,21 +187,26 @@ public class Board extends JPanel {
         for(int i = 0; i < 8; i++)
             for(int j = 0; j < 8; j++)
                 switch (m[i][j]){
-                    case 0:             break;
-                    case 1:             g2.setColor(Color.BLACK);
+                    case 0:
+                        break;
+                    case 1:
+                        g2.setColor(Color.BLACK);
                         g2.fillOval(j * SQ_DIM + 5, i * SQ_DIM + 5, SQ_DIM - 10, SQ_DIM - 10);
                         break;
-                    case 2:             g2.setColor(new Color(224, 226, 213));
+                    case 2:
+                        g2.setColor(new Color(224, 226, 213));
                         g2.fillOval(j * SQ_DIM + 5, i * SQ_DIM + 5, SQ_DIM - 10, SQ_DIM - 10);
                         break;
-                    case 3:             x = j * SQ_DIM;
+                    case 3:
+                        x = j * SQ_DIM;
                         y = i * SQ_DIM;
                         g2.setColor(Color.BLACK);
                         g2.fillOval(x + 5, y + 5, SQ_DIM - 10, SQ_DIM - 10);
                         g2.setColor(Color.RED);
                         g2.fillOval(x + IN_R, y + IN_R, 2 * IN_R, 2 * IN_R);
                         break;
-                    case 4:             x = j * SQ_DIM;
+                    case 4:
+                        x = j * SQ_DIM;
                         y = i * SQ_DIM;
                         g2.setColor(new Color(224, 226, 213));
                         g2.fillOval(x + 5, y + 5, SQ_DIM - 10, SQ_DIM - 10);

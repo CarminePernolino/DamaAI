@@ -3,7 +3,7 @@ package org.example.gui;
 import javax.swing.*;
 
 public class Form extends JFrame {
-    private int SQ_DIM = 80;
+    private int SQ_DIM = 80; // Dimensione cella scacchiera
     private Board b = new Board();
 
     public Form(String txt) {

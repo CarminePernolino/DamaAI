@@ -21,10 +21,10 @@ public class MovesEngine {
         this.color = color;
 
 
-        for(int i = 0; i < 8; i++)
-            for(int j = 0; j < 8; j++)
-                if (matrix[i][j] != Dama.BLANK && matrix[i][j] % 2 == this.color) {
-                    CalculateMoves(matrix, new Point(i,j), new Vector<Point>(), new String());
+        for(int row = 0; row < 8; row++)
+            for(int col = 0; col < 8; col++)
+                if (matrix[row][col] != Dama.BLANK && matrix[row][col] % 2 == this.color) {
+                    CalculateMoves(matrix, new Point(row,col), new Vector<Point>(), new String());
                 }
 
     }
