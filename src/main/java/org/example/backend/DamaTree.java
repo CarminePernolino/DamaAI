@@ -25,8 +25,12 @@ public class DamaTree {
         this.turn = turn;
         if(depth == 0){ // Controlla se la profondità dell'albero di ricerca è pari a 0
             switch (FUNC){
-                case 0: score = Dama.Valute(matrix);break; // Valuta la mossa
-                case 1: score = Dama.EvalPrima(matrix);break; // Valuta la mossa
+                case 0:
+                    score = Dama.Valute(matrix); // Valuta la mossa
+                    break;
+                case 1:
+                    score = Dama.EvalPrima(matrix); // Valuta la mossa
+                    break;
             }
             return;
         }
