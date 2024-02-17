@@ -5,8 +5,8 @@ import java.util.Arrays;
 import java.util.Vector;
 
 public class DamaTree {
-    /* massima profondità di costruzione dell'albero */
-    public static int FUNC = 0; // Utilizzata per selezionare il tipo di valutazione da utilizzare nell'algoritmo di ricerca
+    // MASSIMA PROFONDITÀ DI COSTRUZIONE DELL'ALBERO
+    public static int FUNC = 0; // Per selezionare il tipo di valutazione da utilizzare nell'algoritmo di ricerca
 
     public int score; // Punteggio associato alla mossa corrente.
     public int[][] matrix; // Stato della scacchiera corrente.
