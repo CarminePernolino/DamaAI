@@ -6,8 +6,6 @@ import java.util.Vector;
 
 public class DamaTree {
     // MASSIMA PROFONDITÀ DI COSTRUZIONE DELL'ALBERO
-    public static int FUNC = 0; // Per selezionare il tipo di valutazione da utilizzare nell'algoritmo di ricerca
-
     public int score; // Punteggio associato alla mossa corrente.
     public int[][] matrix; // Stato della scacchiera corrente.
 
@@ -16,22 +14,13 @@ public class DamaTree {
 
     /**
      * Questo costruttore crea l'albero di ricerca e valuta le possibili mosse fino alla profondità specificata
-     * utilizzando l'algoritmo MIN-MAX. La valutazione delle mosse dipende dal valore di FUNC:
-     * -> Se FUNC è 0, viene utilizzata la funzione Dama.Valute() per valutare la mossa.
-     * -> Se FUNC è 1, viene utilizzata la funzione Dama.EvalPrima() per valutare la mossa.
+     * utilizzando l'algoritmo MIN-MAX.
      */
     public DamaTree(int[][] matrix, int depth, int turn){
         this.matrix = matrix;
         this.turn = turn;
         if(depth == 0){ // Controlla se la profondità dell'albero di ricerca è pari a 0
-            switch (FUNC){
-                case 0:
-                    score = Dama.Valute(matrix); // Valuta la mossa
-                    break;
-                case 1:
-                    score = Dama.EvalPrima(matrix); // Valuta la mossa
-                    break;
-            }
+            score = Dama.Valute(matrix); // Valuta la mossa
             return;
         }
         int color;
